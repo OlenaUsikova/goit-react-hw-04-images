@@ -14,7 +14,7 @@ export const App = () => {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [query, setQuery] = useState('');
-  const [error, setError] = useState('');
+  const [ setError] = useState('');
 
   // handleSearch = data => {
   //   this.setState({ query: data, images:[], page: 1} );
@@ -62,7 +62,7 @@ export const App = () => {
         setError(error.message);
       })
       .finally(() => setLoading(false));
-  }, [query, page]);
+  }, [query, page, setError]);
  
   return (
     <MainDiv>
