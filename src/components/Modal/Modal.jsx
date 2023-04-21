@@ -1,36 +1,29 @@
-import React, { Component } from 'react'
+import React, { useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 const modalDiv = document.querySelector('#modal')
 
-export class Modal extends Component {
-	handlcloseModal = e => {
+export const Modal =({onClose, largeImg})=> {
+	const handleCloseModal = e => {
 		console.log(e);
 		if (e.key === 'Escape' || e.target === e.currentTarget) {
-			this.props.onClose()}		}
-
-	// onBackdropClick = e => {
-	// 	if (e.target === e.currentTarget) {
-	// 		this.props.onClose()		}
-	// 		}
-	componentDidMount() {
-		document.addEventListener('keydown', this.handlcloseModal)
-	}
-	componentWillUnmount() {
-		document.removeEventListener('keydown', this.handlcloseModal)
-	}
-	render() {
-		const { onClose, largeImg } = this.props
-		return ReactDOM.createPortal(
-			<ModalWrapper onClick={this.handlcloseModal}>
+			onClose()}}
+	useEffect(()=> {
+	document.addEventListener('keydown', handleCloseModal)
+	return () => {document.removeEventListener('keydown', handleCloseModal)}	
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
+	
+	return ReactDOM.createPortal(
+			<ModalWrapper onClick={handleCloseModal}>
 				<ModalContent>
 				<CloseButton onClick={onClose}>×</CloseButton>
 					<img src={largeImg} alt="largeImg" />
 				</ModalContent>
 			</ModalWrapper>,
 			modalDiv
-		)	}}
+		)	}
 
 		const ModalWrapper = styled.div`
 		position: fixed;
