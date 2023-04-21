@@ -14,7 +14,7 @@ export const App = () => {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [query, setQuery] = useState('');
-  const [ setError] = useState('');
+  const [ error, setError] = useState('');
 
   // handleSearch = data => {
   //   this.setState({ query: data, images:[], page: 1} );
