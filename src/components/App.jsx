@@ -49,14 +49,14 @@ export const App = () => {
     getPosts(query, page)
       .then(res => {
         if (!res.data.hits.length) {
-          setError('Empty array');
+          // setError('Empty array');
           setImages([]);
           alert('Try another query!');
         } else {
           setImages(prevImages => [...prevImages, ...res.data.hits]);
         }
         if ((res.data.totalHits - (page - 1) * 12) < 12) {
-                  setIsloadMore(false)}else {setIsloadMore(true)}
+        setIsloadMore(false)}else {setIsloadMore(true)}
       })
       .catch(error => {
         setError(error.message);
@@ -67,8 +67,9 @@ export const App = () => {
   return (
     <MainDiv>
       <Searchbar onSubmit={handleSearch}></Searchbar>
+      {error && <p>{error}</p>}
       {loading && <Loader />}
-      {!loading && (
+      {images.length > 0 && (
         <div
           style={{
             display: 'flex',
